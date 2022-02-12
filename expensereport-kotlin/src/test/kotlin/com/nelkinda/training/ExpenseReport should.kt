@@ -81,4 +81,15 @@ Total expenses: -2147482648
 """)
     }
 
+    @Test
+    fun `produce non blank report when using system clock`(){
+        val testee = ExpenseReport()
+
+        testee.printReport(emptyList())
+
+
+        val capturedReport = interceptedStdout.toString()
+        assertThat(capturedReport).isNotBlank()
+    }
+
 }
