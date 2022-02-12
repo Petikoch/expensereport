@@ -71,8 +71,8 @@ configure<info.solidsoft.gradle.pitest.PitestPluginExtension> {
     timestampedReports.set(false)
     outputFormats.set(setOf("XML", "HTML"))
     mutators.set(setOf("DEFAULTS", "STRONGER", "CONSTRUCTOR_CALLS", "INLINE_CONSTS", "REMOVE_CONDITIONALS", "REMOVE_INCREMENTS"))
-    mutationThreshold.set(100)
-    coverageThreshold.set(97)
+    mutationThreshold.set(92)
+    coverageThreshold.set(90)
 }
 
 tasks.withType<Test> {

@@ -13,12 +13,12 @@ class Expense {
 
 class ExpenseReport {
 
-    fun printReport(expenses: List<Expense>, date: Date = Date()) {
-        val report = createReport(expenses, date)
+    fun printReport(expenses: List<Expense>) {
+        val report = createReport(expenses)
         print(report)
     }
 
-    fun createReport(expenses: List<Expense>, date: Date = Date()): String {
+    internal fun createReport(expenses: List<Expense>, date: Date = Date()): String {
         var total = 0
         var mealExpenses = 0
         var result = ""
