@@ -1,7 +1,6 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    id("io.spring.dependency-management") version "1.0.11.RELEASE"
     kotlin("jvm") version "1.6.10"
     kotlin("plugin.jpa") version "1.6.10"
     jacoco
@@ -10,65 +9,23 @@ plugins {
 
 group = "com.nelkinda.training"
 version = "0.0.1-SNAPSHOT"
-java.sourceCompatibility = JavaVersion.VERSION_11
-
-configurations {
-    compileOnly {
-        extendsFrom(configurations.annotationProcessor.get())
-    }
-}
 
 repositories {
     mavenCentral()
 }
 
-dependencyManagement {
-    dependencies {
-        dependencySet("io.cucumber:7.1.0") {
-            entry("cucumber-java")
-            entry("cucumber-junit-platform-engine")
-        }
-        dependencySet("org.junit.jupiter:5.8.2") {
-            entry("junit-jupiter")
-            entry("junit-jupiter-api")
-            entry("junit-jupiter-engine")
-            entry("junit-jupiter-params")
-        }
-        dependencySet("org.junit.platform:1.8.2") {
-            entry("junit-platform-commons")
-            entry("junit-platform-engine")
-            entry("junit-platform-launcher")
-            entry("junit-platform-suite-api")
-            entry("junit-platform-suite-commons")
-            entry("junit-platform-suite-engine")
-        }
-        dependency("org.pitest:pitest-junit5-plugin:0.15")
-        dependency("org.pitest:pitest-command-line:1.7.3")
-    }
-}
-
 dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-reflect")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    implementation(kotlin("stdlib-jdk8"))
 
-    testImplementation("io.cucumber:cucumber-java")
-    testImplementation("io.cucumber:cucumber-junit-platform-engine")
-    testImplementation("org.junit.jupiter:junit-jupiter")
-    testImplementation("org.junit.jupiter:junit-jupiter-api")
-    testImplementation("org.junit.jupiter:junit-jupiter-engine")
-    testImplementation("org.junit.jupiter:junit-jupiter-params")
-    testImplementation("org.junit.platform:junit-platform-commons")
-    testImplementation("org.junit.platform:junit-platform-engine")
-    testImplementation("org.junit.platform:junit-platform-launcher")
-    testImplementation("org.junit.platform:junit-platform-suite-api")
-    testImplementation("org.junit.platform:junit-platform-suite-commons")
-    testImplementation("org.junit.platform:junit-platform-suite-engine")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.8.2")
+    testImplementation("org.assertj:assertj-core:3.22.0")
+    testImplementation("org.mockito:mockito-core:4.3.1")
 }
 
 tasks.withType<KotlinCompile> {
     kotlinOptions {
         freeCompilerArgs = listOf("-Xjsr305=strict")
-        jvmTarget = "17"
+        jvmTarget = "11"
     }
 }
 
@@ -110,6 +67,7 @@ configure<info.solidsoft.gradle.pitest.PitestPluginExtension> {
     avoidCallsTo.set(setOf("kotlin.jvm.internal"))
     targetClasses.set(setOf("com.nelkinda.training.*"))
     pitestVersion.set("1.7.3")
+    junit5PluginVersion.set("0.15")
     timestampedReports.set(false)
     outputFormats.set(setOf("XML", "HTML"))
     mutators.set(setOf("DEFAULTS", "STRONGER", "CONSTRUCTOR_CALLS", "INLINE_CONSTS", "REMOVE_CONDITIONALS", "REMOVE_INCREMENTS"))
