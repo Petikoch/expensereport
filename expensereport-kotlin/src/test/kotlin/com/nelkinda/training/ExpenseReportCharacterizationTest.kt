@@ -7,7 +7,7 @@ import java.io.ByteArrayOutputStream
 import java.io.PrintStream
 import java.util.*
 
-class `ExpenseReport should` {
+class ExpenseReportCharacterizationTest {
 
     private val originalStdout = System.out
     private val interceptedStdout = ByteArrayOutputStream().also {
@@ -18,7 +18,7 @@ class `ExpenseReport should` {
     fun `restore stdout`() = System.setOut(originalStdout)
 
     @Test
-    fun `print header and 0 sums for empty expenses list`() {
+    fun `test printReport prints header and 0 sums for empty expenses list`() {
         val testee = ExpenseReport()
 
         testee.printReport(emptyList(), GregorianCalendar(2022, 0, 1).time)
@@ -31,7 +31,7 @@ Total expenses: 0
     }
 
     @Test
-    fun `print report using all types of expenses with corner cases for meal limits`() {
+    fun `test printReport prints report using all types of expenses with corner cases for meal limits`() {
         val testee = ExpenseReport()
         val expenses = listOf(
             Expense().apply { type = ExpenseType.DINNER; amount = 5000 },
@@ -60,7 +60,7 @@ Total expenses: 22003
     }
 
     @Test
-    fun `print report with number overflow for Int max value`() {
+    fun `test printReport prints report with number overflow for Int max value in one of the expenses`() {
         val testee = ExpenseReport()
         val expenses = listOf(
             Expense().apply { type = ExpenseType.BREAKFAST; amount = 1 },
@@ -82,7 +82,7 @@ Total expenses: -2147482648
     }
 
     @Test
-    fun `produce non blank report when using system clock`(){
+    fun `test printReport prints non blank report when using system clock and does not throw`(){
         val testee = ExpenseReport()
 
         testee.printReport(emptyList())
