@@ -87,7 +87,6 @@ Total expenses: -2147482648
 
         testee.printReport(emptyList())
 
-
         val capturedReport = interceptedStdout.toString()
         assertThat(capturedReport).isNotBlank()
     }

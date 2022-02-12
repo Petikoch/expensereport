@@ -72,7 +72,7 @@ configure<info.solidsoft.gradle.pitest.PitestPluginExtension> {
     outputFormats.set(setOf("XML", "HTML"))
     mutators.set(setOf("DEFAULTS", "STRONGER", "CONSTRUCTOR_CALLS", "INLINE_CONSTS", "REMOVE_CONDITIONALS", "REMOVE_INCREMENTS"))
     mutationThreshold.set(100)
-    coverageThreshold.set(100)
+    coverageThreshold.set(97)
 }
 
 tasks.withType<Test> {
